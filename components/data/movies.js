@@ -1,6 +1,3 @@
-
-import './App.css'
-
 const movies = [
     {
         id: 1,
@@ -17,7 +14,7 @@ const movies = [
         id: 2,
         title: "Relatos salvajes",
         image:
-        "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse3.explicit.bing.net%2Fth%2Fid%2FOIP.52HeZe5Ruihv7OwZfr15twHaKX%3Fr%3D0%26pid%3DApi&f=1&ipt=8efd470b67f3631de62df36186c99295ad80af77fc19650e27c2cd12a7b657dc&ipo=images",
+        "",
         rating: 8.1,
         duration: 122,
         summary:
@@ -48,39 +45,4 @@ const movies = [
     }
 ];
 
-// https://react-bootstrap.netlify.app/docs/layout/grid/
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-
-import MoviesCard from '../components/movies/MoviesCard'
-
-function App() {
-  
-    return (
-      <Container>
-        <Row>
-          {movies.map((movie) => (
-            <Col md={4} key={movie.id}>
-              <MoviesCard
-                title={movie.title}
-                img={movie.image}
-                rating={movie.rating}
-                duration={movie.duration}
-                summary={movie.summary}
-                available={movie.available}
-              />
-            </Col>
-          ))}
-        </Row>
-    </Container>
-    )
-}
-
-/*
-Uncaught Error: Objects are not valid as a React child (found:
-object with keys {title, img, rating, duration, summary, available}).
-If you meant to render a collection of children, use an array instead.
-*/
-
-export default App
+export default movies;
