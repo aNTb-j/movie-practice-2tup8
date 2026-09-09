@@ -3,7 +3,6 @@
 
 import Movies from './components/movies/Movies.jsx';
 
-
 function App() {
 
   return (
