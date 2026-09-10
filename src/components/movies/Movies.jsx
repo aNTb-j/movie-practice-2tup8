@@ -4,7 +4,6 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
-import Form from 'react-bootstrap/Form'
 
 import MovieItem from '../movieItem/MovieItem';
 import NewMovie from '../newMovie/NewMovie';
@@ -62,49 +61,56 @@ const Movies = () => {
 	const [movies, setMovies] = useState(initialMovies);
 	const [movieShowed, setMovieShowed] = useState("");
 
+	const [movieResult, setMovieResult] = useState(initialMovies);
+
 	const handleMovieAdd = (movieData) => {
 		const data = {
 			...movieData,
 			id: Math.random()
 		}
-		setMovies([...initialMovies, data]) // ...spread operator
+		setMovies([...movies, data]) // ...spread operator
 	}
 
 	const handleMovieData = (movieData) => {
 		setMovieShowed(movieData)
 	}
 
+	const handleMovieSearch = (e) => {
 
-	const handleMovieDelete = (movieTitle) => {
+		const movieData = e.target.value;
 
-		setMovies([...movies.filter((item) => item.title != movieTitle)])
+		const result = movies.filter((movie) =>
+			movie.title
+				.toLowerCase()
+				.includes(movieData.toLowerCase())
+		);
+		
+		setMovieResult(result);
+		console.log(movieResult)
+	};
 
+	const handleMovieDelete = (movieId) => {
+		setMovies(movies.filter((item) => item.id != movieId))
 	}
 
-	const handleMovieSearch = (movieData) => {
-		console.log(movieData)
-	}
+
 
 	return (
 		<div className="movie-app-bg py-5">
-			
+
 			<Container>
 
 				<p>{movieShowed}</p>
 
 				<NewMovie onMovieAdd={handleMovieAdd} />
 
-				<Form.Control
-					type="number"
-					placeholder="Minutos"
-					min={1}
-					onChange={<MovieSearch onMovieSearch={handleMovieSearch} />}
+				<MovieSearch handleMovieSearch={handleMovieSearch} />
 
-				/>
 				<Row xs={1} sm={2} lg={3} xl={4} className="g-4">
 					{movies.map((movie) =>
 						<Col key={movie.id}>
 							<MovieItem
+								id={movie.id}
 								title={movie.title}
 								imageUrl={movie.imageUrl}
 								rating={movie.rating}
@@ -112,7 +118,7 @@ const Movies = () => {
 								summary={movie.summary}
 								available={movie.available}
 								handleMovieData={handleMovieData}
-								movieToDelete={handleMovieDelete}
+								handleMovieDelete={handleMovieDelete}
 							/>
 						</Col>
 					)}

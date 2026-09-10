@@ -5,27 +5,34 @@ import Card from 'react-bootstrap/Card';
 import Badge from 'react-bootstrap/Badge';
 import DeleteModal from '../deleteModal/DeleteModal';
 
-const MovieItem = ({ title, imageUrl, rating, duration, summary, available, handleMovieData }) => {
+const MovieItem = ({ id, title, imageUrl, rating, duration, summary, available, handleMovieData, handleMovieDelete }) => {
 
 	const [show, setShow] = useState(false);
 
 	const handleShow = () => setShow(true);
+	const handleClose = () => setShow(false);
 
 	const handleData = (e) => {
 		e.preventDefault();
-
 		const data = title
 		handleMovieData(data)
 	}
 
-
-
-
+	const handleMovieToDelete = (e) => {
+		e.preventDefault();
+		const data = id
+		console.log(id)
+		handleMovieDelete(data)
+	}
 
 
 	return (
 		<section>
-			<DeleteModal show={show} />
+			<DeleteModal 
+				show={show} 
+    			handleClose={handleClose}
+				handleMovieToDelete={handleMovieToDelete}  
+			/>
 			<Card bg="dark" text="light" className="h-100 shadow-lg border-secondary movie-card">
 				<Card.Img variant="top" src={imageUrl} className="object-fit-cover movie-card-img" />
 				<Card.Body className="d-flex flex-column">

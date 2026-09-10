@@ -1,18 +1,16 @@
-import { useState } from 'react';
+import Form from 'react-bootstrap/Form'
 
 // El filtro se hace en movies
 
-const MovieSearch = ({ movieSearch, completeMovies }) => {
-
-    const [movieResult, setMovieResult] = useState("");
-
-    const onMovieSearch = (movieSearch, completeMovies) => {
-        setMovieResult(completeMovies.filter((movie) => movie.title.toLowerCase().includes(movieSearch.toLowerCase())))
-    }
+const MovieSearch = ({ handleMovieSearch }) => {
 
     return (
-        <div>MovieSearch</div>
-    )
-}
+        <Form.Control
+            type="text"
+            placeholder="Buscar película"
+            onChange={handleMovieSearch}
+        />
+    );
+};
 
-export default MovieSearch
+export default MovieSearch;
