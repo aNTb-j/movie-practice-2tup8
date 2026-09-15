@@ -57,7 +57,7 @@ const initialMovies = [
 	}
 ];
 
-const Movies = () => {
+const Movie = () => {
 	const [movies, setMovies] = useState(initialMovies);
 	const [movieShowed, setMovieShowed] = useState("");
 
@@ -68,7 +68,10 @@ const Movies = () => {
 			...movieData,
 			id: Math.random()
 		}
-		setMovies([...movies, data]) // ...spread operator
+		const updatedMovies = [...movies, data];
+
+		setMovies(updatedMovies);
+		setMovieResult(updatedMovies);
 	}
 
 	const handleMovieData = (movieData) => {
@@ -84,14 +87,19 @@ const Movies = () => {
 				.toLowerCase()
 				.includes(movieData.toLowerCase())
 		);
-		
+
 		setMovieResult(result);
 		console.log(movieResult)
 	};
 
 	const handleMovieDelete = (movieId) => {
-		setMovies(movies.filter((item) => item.id != movieId))
-	}
+		const updatedMovies = movies.filter(
+			(item) => item.id !== movieId
+		);
+
+		setMovies(updatedMovies);
+		setMovieResult(updatedMovies);
+	};
 
 
 
@@ -107,7 +115,7 @@ const Movies = () => {
 				<MovieSearch handleMovieSearch={handleMovieSearch} />
 
 				<Row xs={1} sm={2} lg={3} xl={4} className="g-4">
-					{movies.map((movie) =>
+					{movieResult.map((movie) =>
 						<Col key={movie.id}>
 							<MovieItem
 								id={movie.id}
@@ -128,4 +136,4 @@ const Movies = () => {
 	)
 }
 
-export default Movies;
+export default Movie;

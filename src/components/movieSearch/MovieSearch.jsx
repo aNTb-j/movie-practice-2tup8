@@ -4,13 +4,18 @@ import Form from 'react-bootstrap/Form'
 
 const MovieSearch = ({ handleMovieSearch }) => {
 
-    return (
-        <Form.Control
-            type="text"
-            placeholder="Buscar película"
-            onChange={handleMovieSearch}
-        />
-    );
+	return (
+		<div>
+			<Form>
+				<Form.Control
+					type="text"
+					placeholder="Buscar película"
+					onChange={handleMovieSearch}
+				/>
+			</Form>
+			<br/>
+		</div>
+	);
 };
 
 export default MovieSearch;
